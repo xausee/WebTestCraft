@@ -2,44 +2,53 @@ module WebTestCraft
   class Browser
     attr_accessor :browser
 
-    def initialize(type = 'ie')
-      unless ENV['BROWSER'].nil?
-        _start ENV['BROWSER']
-      else
-        _start type
+    def self.start type = 'ie'
+      @browser = case type.upcase
+                   when 'IE'
+                     IE.start
+                   when 'FIREFOX'
+                     Firefox.start
+                   when 'CHROME'
+                     Chrome.start
+                   else
+                     raise 'unsupported browser type.'
+                 end
+    end
+
+    class IE
+      def self.start
+        require 'watir'
+        ENV['PATH'] = File.expand_path File.join(File.dirname(__FILE__), '..', 'driver')
+        Watir::Browser.new :ie
       end
     end
 
-    def self._start (b)
-      case b.upcase
-        when 'IE'
-          require 'watir'
-          ENV['PATH'] = File.expand_path File.join(File.dirname(__FILE__), '..', 'driver')
-          @browser = Watir::Browser.new :ie
-        when 'FIREFOX'
-          require 'watir-webdriver'
-          download_directory = "#{Dir.pwd}/downloads"
-          download_directory.gsub!('/', '\\')  if Selenium::WebDriver::Platform.windows?
+    class Firefox
+      def self.start
+        require 'watir-webdriver'
+        download_directory = "#{Dir.pwd}/downloads"
+        download_directory.gsub!('/', '\\')  if Selenium::WebDriver::Platform.windows?
 
-          profile = Selenium::WebDriver::Firefox::Profile.new
-          profile['browser.download.folderList'] = 2 # custom location
-          profile['browser.download.dir'] = download_directory
-          profile['browser.helperApps.neverAsk.saveToDisk'] = 'text/csv,application/pdf'
+        profile = Selenium::WebDriver::Firefox::Profile.new
+        profile['browser.download.folderList'] = 2 # custom location
+        profile['browser.download.dir'] = download_directory
+        profile['browser.helperApps.neverAsk.saveToDisk'] = 'text/csv,application/pdf'
+        Watir::Browser.new :firefox, :profile => profile
+      end
+    end
 
-          @browser = Watir::Browser.new :firefox, :profile => profile
-        when 'CHROME'
-          require 'watir-webdriver'
-          ENV['PATH'] = File.expand_path File.join(File.dirname(__FILE__), '..', 'driver')
-          http_client = Selenium::WebDriver::Remote::Http::Default.new
-          http_client.timeout = 120
-          download_directory = "#{Dir.pwd}/downloads"
-          download_directory.gsub!('/', '\\') if  Selenium::WebDriver::Platform.windows?
-          args = %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --disable-logging --no-proxy-server]
-          prefs = {'download' => {'default_directory' => download_directory, 'prompt_for_download' => false}}
-          caps = Selenium::WebDriver::Remote::Capabilities.chrome('chromeOptions' => {'args' => args, 'prefs' => prefs})
-          @browser = Watir::Browser.new(:chrome, :http_client => http_client, :desired_capabilities => caps)
-        else
-          raise 'unsupported browser type.'
+    class Chrome
+      def self.start
+        require 'watir-webdriver'
+        ENV['PATH'] = File.expand_path File.join(File.dirname(__FILE__), '..', 'driver')
+        http_client = Selenium::WebDriver::Remote::Http::Default.new
+        http_client.timeout = 120
+        download_directory = "#{Dir.pwd}/downloads"
+        download_directory.gsub!('/', '\\') if  Selenium::WebDriver::Platform.windows?
+        args = %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --disable-logging --no-proxy-server]
+        prefs = {'download' => {'default_directory' => download_directory, 'prompt_for_download' => false}}
+        caps = Selenium::WebDriver::Remote::Capabilities.chrome('chromeOptions' => {'args' => args, 'prefs' => prefs})
+        Watir::Browser.new(:chrome, :http_client => http_client, :desired_capabilities => caps)
       end
     end
   end

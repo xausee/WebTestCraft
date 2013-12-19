@@ -1,11 +1,11 @@
 $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__)))
-puts 'test start...'
 
 require 'cucumber'
+require 'web_test_craft'
 require 'browser'
 
 World(WebTestCraft)
 
 Before do |scenario|
-  @browser =  WebTestCraft::Browser._start('chrome')
+  @browser =  WebTestCraft::Browser.start('chrome')
 end

@@ -1,4 +1,3 @@
-$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__)))
 require 'env'
 
 def load_files(files_array)

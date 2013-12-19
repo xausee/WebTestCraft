@@ -6,29 +6,32 @@ module WebTestCraft
     end
   end
 
-  class Page
+    class Page
 
-    def self.create_widget_call_method(class_name, caller_method)
-      define_method("#{caller_method}") do
-        class_name.new(@browser)
+      def self.create_widget_call_method(class_name, caller_method)
+        define_method("#{caller_method}") do
+          class_name.new(@browser)
+        end
       end
-    end
 
-    def initialize browser
-      @browser = browser
-    end
+      def initialize browser
+        @browser = browser
+      end
 
-    def layer
-      @browser
-    end
+      def layer
+        @browser
+      end
 
-    def url
-      raise 'you must define url in your page class.'
-    end
+      def title
+        layer.title
+      end
 
-    def visit
-      @browser.goto url
-    end
+      def url
+        raise 'you must define url in your page class.'
+      end
+
+      def visit
+        @browser.goto url
+      end
   end
-
 end
