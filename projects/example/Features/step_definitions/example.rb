@@ -8,5 +8,6 @@ And(/^search game using keyword Dota$/) do
 end
 
 Then(/^get a search result page$/) do
+  sleep(5)
   baidu_search_result_page.results_widget.first_result.click
 end

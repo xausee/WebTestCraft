@@ -10,7 +10,7 @@ module WebTestCraft
     end
 
     def first_result
-      text_result_container.table(:id => 1.to_s).a(:class => 'favurl')
+      text_result_container.div(:id => 1.to_s).a(:class => 'favurl')
     end
 
   end

@@ -6,11 +6,11 @@ module WebTestCraft
     end
 
     def keywords_input
-      layer.text_field(:id => 'kw')
+      layer.text_field(:id => 'kw1')
     end
 
     def search_button
-      layer.button(:id => 'su')
+      layer.button(:id => 'su1')
     end
 
   end
