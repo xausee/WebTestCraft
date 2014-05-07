@@ -2,10 +2,16 @@ $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__)))
 
 require 'cucumber'
 require 'web_test_craft'
-require 'browser'
+
+$env = WebTestCraft::Env.new
 
 World(WebTestCraft)
 
 Before do |scenario|
-  @browser =  WebTestCraft::Browser.start('chrome')
+  $env.before scenario
+  @browser = $env.browser
+end
+
+at_exit do
+  $env.teardown
 end
