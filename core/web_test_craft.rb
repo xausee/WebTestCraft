@@ -2,6 +2,7 @@ require 'browser'
 require 'log'
 
 module WebTestCraft
+
   class Env
     attr_accessor :browser
 
