@@ -4,6 +4,11 @@ module WebTestCraft
     def url
       'www.baidu.com'
     end
+
+    def self.page_id
+      #id="fm"
+      "fm"
+    end
   end
   Pages.register_page(WebTestCraft::BaiduHomePage, :baidu_home_page)
 end
