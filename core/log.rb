@@ -13,6 +13,10 @@ module WebTestCraft
       puts "[INFO]: #{message}"
     end
 
+    def self.warning message
+      puts "[WARNING]: #{message}"
+    end
+
     def self.error message
      puts "[ERROR]: #{message}"
     end

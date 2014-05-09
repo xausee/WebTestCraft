@@ -1,3 +1,6 @@
+$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__)))
+require "log"
+
 module WebTestCraft
   class Browser
     attr_accessor :browser
@@ -23,6 +26,7 @@ module WebTestCraft
       def self.start
         require 'watir'
         ENV['PATH'] = File.expand_path File.join(File.dirname(__FILE__), '..', 'driver')
+        Logger.info "Launching Internet Explorer..."
         Watir::Browser.new :ie
       end
     end
@@ -37,6 +41,7 @@ module WebTestCraft
         profile['browser.download.folderList'] = 2 # custom location
         profile['browser.download.dir'] = download_directory
         profile['browser.helperApps.neverAsk.saveToDisk'] = 'text/csv,application/pdf'
+        Logger.info "Launching Firefox..."
         Watir::Browser.new :firefox, :profile => profile
       end
     end
@@ -52,6 +57,7 @@ module WebTestCraft
         args = %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate --disable-logging --no-proxy-server]
         prefs = {'download' => {'default_directory' => download_directory, 'prompt_for_download' => false}}
         caps = Selenium::WebDriver::Remote::Capabilities.chrome('chromeOptions' => {'args' => args, 'prefs' => prefs})
+        Logger.info "Launching Chrome..."
         Watir::Browser.new(:chrome, :http_client => http_client, :desired_capabilities => caps)
       end
     end

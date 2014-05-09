@@ -8,5 +8,5 @@ And(/^Search game using keyword Dota$/) do
 end
 
 Then(/^Choose the first result$/) do
-  baidu_search_result_page.results_widget.first_result.click
+  baidu_search_result_page.results_widget.first_result.wait_exists.click
 end

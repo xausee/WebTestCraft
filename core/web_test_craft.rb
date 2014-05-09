@@ -9,8 +9,15 @@ module WebTestCraft
     attr_accessor :logger
 
     def initialize
-      @browser =  Browser.start
       @logger = Logger
+      print_envs
+      @browser =  Browser.start
+    end
+
+    def print_envs
+      @logger.text "Environment Variables:
+                      BROWSER = #{ENV['BROWSER']}
+                      DEBUG   = #{ENV['DEBUG']}"
     end
 
     def before scenario

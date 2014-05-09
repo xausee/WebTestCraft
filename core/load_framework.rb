@@ -9,7 +9,6 @@ def load_files(files_array)
   end
 end
 
-
 $env.logger.info 'load overrides files...'
 load_files Dir[File.join(File.dirname(__FILE__), 'overrides','*.rb')]
 
