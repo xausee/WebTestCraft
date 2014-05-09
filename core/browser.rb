@@ -3,12 +3,16 @@ module WebTestCraft
     attr_accessor :browser
 
     def self.start type = 'ie'
+      unless ENV['BROWSER'].nil?
+        type = ENV['BROWSER']
+      end
+
       @browser = case type.upcase
-                   when 'IE'
+                   when 'IE','ie'
                      IE.start
-                   when 'FIREFOX'
+                   when 'FIREFOX','firefox'
                      Firefox.start
-                   when 'CHROME'
+                   when 'CHROME','chrome'
                      Chrome.start
                    else
                      raise 'unsupported browser type.'

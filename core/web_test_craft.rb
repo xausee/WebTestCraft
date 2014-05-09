@@ -9,7 +9,7 @@ module WebTestCraft
     attr_accessor :logger
 
     def initialize
-      @browser =  Browser.start('chrome')
+      @browser =  Browser.start
       @logger = Logger
     end
 
@@ -23,7 +23,7 @@ module WebTestCraft
     end
 
     def teardown
-      if ENV['DEBUG'] == "ON"
+      if ENV['DEBUG'] == "ON" || ENV['DEBUG'] == "on"
         @logger.info "Debug model is on, not close the browser."
       else
         @logger.info "close browser..."
