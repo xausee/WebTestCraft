@@ -34,6 +34,7 @@ module WebTestCraft
       raise 'you must define page id in your page class.'
     end
 
+    # DODO finish this function
     def self.is_current_page?(browser, pageid_current=nil)
       # pageid_current ||= Class.new.extend(WebTestCraft).current_pageid(browser)
       #
@@ -42,8 +43,7 @@ module WebTestCraft
       # else
       #   pageid_current == page_id
       # end
-      sleep(5)
-      p browser.div(:class => "content_left").exists?
+      browser.div(:id => "wrapper_wrapper").div(:id => "content_left").exists?
     end
 
     def self.wait_until_loaded(browser, timeout=60)
