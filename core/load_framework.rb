@@ -1,3 +1,4 @@
+$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__)))
 require 'env'
 
 def load_files(files_array)
@@ -8,18 +9,18 @@ def load_files(files_array)
   end
 end
 
-#$env.logger.info
-puts 'load overrides files...'
+
+$env.logger.info 'load overrides files...'
 load_files Dir[File.join(File.dirname(__FILE__), 'overrides','*.rb')]
 
-puts 'load core files...'
+$env.logger.info 'load core files...'
 load_files Dir[File.join(File.dirname(__FILE__), '*.rb')]
 
-puts 'load widgets help files...'
+$env.logger.info 'load widgets help files...'
 load_files Dir[File.join(File.dirname(__FILE__),'..', 'helpers', 'widgets', '*.rb')]
 
-puts 'load pages help files...'
+$env.logger.info 'load pages help files...'
 load_files Dir[File.join(File.dirname(__FILE__),'..', 'helpers', 'pages', '*.rb')]
 
-puts 'load common step files...'
+$env.logger.info 'load common step files...'
 load_files Dir[File.join(File.dirname(__FILE__),'..', 'helpers', 'common_step_definitions', '*.rb')]
