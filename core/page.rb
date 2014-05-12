@@ -30,32 +30,47 @@ module WebTestCraft
       raise 'you must define url in your page class.'
     end
 
+    # if most of pages have page id control flag, use it.
     def self.page_id
       raise 'you must define page id in your page class.'
     end
 
-    # DODO finish this function
-    def self.is_current_page?(browser, pageid_current=nil)
-      # pageid_current ||= Class.new.extend(WebTestCraft).current_pageid(browser)
-      #
-      # if page_id.class == Regexp
-      #   pageid_current =~ page_id
-      # else
-      #   pageid_current == page_id
-      # end
-      browser.div(:id => "wrapper_wrapper").div(:id => "content_left").exists?
+    def page_mark
+      raise 'you must define page mark in your page class.'
     end
 
-    def self.wait_until_loaded(browser, timeout=60)
-      $env.logger.info "Waiting for the #{self} page to load, Timeout: #{timeout} seconds."
+    def self.page_mark_value
+      raise 'you must define page mark in your page class.'
+    end
+
+    def self.is_current_page?(browser)
+      self.new(browser).page_mark.exists?
+    end
+
+    # DODO implement this function using page id.
+    # def self.is_current_page?(browser, pageid_current=nil)
+    #   # pageid_current ||= Class.new.extend(WebTestCraft).current_pageid(browser)
+    #   #
+    #   # if page_id.class == Regexp
+    #   #   pageid_current =~ page_id
+    #   # else
+    #   #   pageid_current == page_id
+    #   # end
+    # end
+
+    def self.wait_until_loaded(browser, timeout = 60)
+      $env.logger.info "Waiting for the #{self} to load, Timeout: #{timeout} seconds."
       begin
         browser.wait_until(timeout) { is_current_page?(browser) }
       rescue Watir::Wait::TimeoutError
+      #   raise Watir::Wait::TimeoutError.new(timeout), %Q{Timed out (#{timeout} seconds) waiting for page to load.
+      #   Expected page: #{self}, page_id: #{page_id}
+      #  Current page: page_id: #{Class.new.extend(Expedia).current_pageid(browser)}, URL = '#{browser.url}'.
+      # }
         raise Watir::Wait::TimeoutError.new(timeout), %Q{Timed out (#{timeout} seconds) waiting for page to load.
-        Expected page: #{self}, page_id: #{page_id}
-
+       Expected page: #{self}, page_mark_value: #{page_mark_value}
+       Current page: URL = '#{browser.url}'.
       }
-        #Current page: page_id: #{Class.new.extend(Expedia).current_pageid(browser)}, URL = '#{browser.url}'.
       end
     end
 

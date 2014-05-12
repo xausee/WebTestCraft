@@ -9,6 +9,10 @@ module WebTestCraft
       puts message
     end
 
+    def self.step message
+      puts "[STEP]: #{message}"
+    end
+
     def self.info message
       puts "[INFO]: #{message}"
     end
