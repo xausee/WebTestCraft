@@ -1,6 +1,6 @@
 module WebTestCraft
   class BaiduHomePage < Page
-    Widgets.register_widget(WebTestCraft::SearchWidget, :search_widget)
+    Widgets.register_widget(WebTestCraft::BaiduSearchWidget, :baidu_search_widget)
     def url
       'www.baidu.com'
     end

@@ -1,5 +1,5 @@
 module WebTestCraft
-  class SearchWidget < WebTestCraft::Widget
+  class BaiduSearchWidget < WebTestCraft::Widget
 
     def layer
       @container.div(:id => 'fm')
@@ -14,5 +14,5 @@ module WebTestCraft
     end
 
   end
-  WebTestCraft::Page.create_widget_call_method(WebTestCraft::SearchWidget, :search_widget)
+  WebTestCraft::Page.create_widget_call_method(WebTestCraft::BaiduSearchWidget, :baidu_search_widget)
 end

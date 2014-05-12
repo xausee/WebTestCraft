@@ -1,5 +1,5 @@
 module WebTestCraft
-  class ResultsWidget < WebTestCraft::Widget
+  class BaiduResultsWidget < WebTestCraft::Widget
 
     def layer
       @container.div(:id => 'container')
@@ -14,5 +14,5 @@ module WebTestCraft
     end
 
   end
-  WebTestCraft::Page.create_widget_call_method(WebTestCraft::ResultsWidget, :results_widget)
+  WebTestCraft::Page.create_widget_call_method(WebTestCraft::BaiduResultsWidget, :baidu_results_widget)
 end
