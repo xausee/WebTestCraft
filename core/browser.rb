@@ -5,7 +5,7 @@ module WebTestCraft
   class Browser
     attr_accessor :browser
 
-    def self.start type = 'ie'
+    def self.start type = 'FIREFOX'
       unless ENV['BROWSER'].nil?
         type = ENV['BROWSER']
       end

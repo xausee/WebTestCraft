@@ -15,9 +15,19 @@ module WebTestCraft
     end
 
     def print_envs
-      @logger.text "Environment Variables:
-                      BROWSER = #{ENV['BROWSER']}
-                      DEBUG   = #{ENV['DEBUG']}"
+      @logger.text "Environment Variables:"
+
+      unless ENV['BROWSER'].nil?
+        @logger.text "                      BROWSER = #{ENV['BROWSER']}"
+      else
+        @logger.text "                      BROWSER = FIREFOX(Default)"
+      end
+
+      unless ENV['DEBUG'].nil?
+        @logger.text "                      DEBUG = #{ENV['DEBUG']}"
+      else
+        @logger.text "                      DEBUG = OFF(Default)"
+      end
     end
 
     def before scenario
