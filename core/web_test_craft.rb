@@ -1,41 +1,27 @@
-require 'browser'
-require 'log'
-
 module WebTestCraft
 
-  class Env
-    attr_accessor :browser
-
-    attr_accessor :logger
-
-    def initialize
-      @logger = Logger
-      print_envs
-      @browser =  Browser.start
-    end
-
-    def print_envs
-      @logger.text "Environment Variables:
-                      BROWSER = #{ENV['BROWSER']}
-                      DEBUG   = #{ENV['DEBUG']}"
-    end
-
-    def before scenario
-      @logger.text ""
-      @logger.text scenario.name
-      scenario.steps.each do |step|
-        @logger.text step.name
-      end
-      @logger.text ""
-    end
-
-    def teardown
-      if ENV['DEBUG'] == "ON" || ENV['DEBUG'] == "on"
-        @logger.info "Debug model is on, not close the browser."
-      else
-        @logger.info "close browser..."
-        @browser.close
-      end
-    end
+  def is_registered_page_type?(page_type)
+    type = Pages.all.find { |page| page == page_type }
+    type = Pages.all.find { |page| page == eval("WebTestCraft::#{page_type}") } if !type
+    type.nil? ? false : true
+  rescue NameError
+    return false
   end
+
+  def determine_page_type(page_name)
+    page_class = page_name.to_class_name
+    if !is_registered_page_type?(page_class)
+      page_class << "Page"
+      if !is_registered_page_type?(page_class)
+        raise "Passed page type is not registered in WebTestCraft Pages repository: '#{page_name}'"
+      end
+    end
+    return WebTestCraft.const_get("#{page_class}")
+  end
+
+  def wait_page_loaded(page_name)
+    page_class = determine_page_type(page_name)
+    page_class.wait_until_loaded(@browser, 30)
+  end
+
 end

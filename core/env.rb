@@ -1,7 +1,7 @@
 $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__)))
 
 require 'cucumber'
-require 'web_test_craft'
+require 'Environment'
 
 $env = WebTestCraft::Env.new
 
