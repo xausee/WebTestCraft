@@ -7,9 +7,9 @@ Scenario: Visit baidu and do a search
   Then Current page must be Baidu Search Results page
   Then Choose the first result
 
-  Scenario: Visit google and do a search
-    Given User visit google home page
-    Then Current page must be Google Home page
-    And Search version control tool Git by google
-    Then Current page must be Google Search Results page
-    Then Choose the first result on google search results page
+Scenario: Visit google and do a search
+  Given User visit google home page
+  Then Current page must be Google Home page
+  And Search version control tool Git by google
+  Then Current page must be Google Search Results page
+  Then Choose the first result on google search results page
