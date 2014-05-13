@@ -24,5 +24,10 @@ module WebTestCraft
     def self.error message
      puts "[ERROR]: #{message}"
     end
+
+    def self.save_screenshot(screenshot_name, message = "")
+      puts "[SCREENSHOT]:  Save screenshot, file name  is #{screenshot_name}. #{message}"
+      $env.browser.screenshot.save(screenshot_name)
+    end
   end
 end

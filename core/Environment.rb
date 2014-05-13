@@ -24,9 +24,9 @@ module WebTestCraft
       end
 
       unless ENV['DEBUG'].nil?
-        @logger.text "                      DEBUG = #{ENV['DEBUG']}"
+        @logger.text "                      DEBUG   = #{ENV['DEBUG']}"
       else
-        @logger.text "                      DEBUG = OFF(Default)"
+        @logger.text "                      DEBUG   = OFF(Default)"
       end
     end
 

@@ -24,4 +24,8 @@ module WebTestCraft
     page_class.wait_until_loaded(@browser, 30)
   end
 
+  def save_screenshot(screenshot_name)
+    $env.browser.screenshot.save(screenshot_name)
+  end
+
 end
