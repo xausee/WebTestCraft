@@ -25,7 +25,7 @@ module WebTestCraft
     class IE
       def self.start
         require 'watir'
-        ENV['PATH'] = File.expand_path File.join(File.dirname(__FILE__), '..', 'driver')
+        ENV['PATH'] = File.expand_path File.join(File.dirname(__FILE__), 'driver')
         Logger.info "Launching Internet Explorer..."
         Watir::Browser.new :ie
       end
@@ -49,7 +49,7 @@ module WebTestCraft
     class Chrome
       def self.start
         require 'watir-webdriver'
-        ENV['PATH'] = File.expand_path File.join(File.dirname(__FILE__), '..', 'driver')
+        ENV['PATH'] = File.expand_path File.join(File.dirname(__FILE__), 'driver')
         http_client = Selenium::WebDriver::Remote::Http::Default.new
         http_client.timeout = 120
         download_directory = "#{Dir.pwd}/downloads"
