@@ -25,9 +25,21 @@ namespace :test do
     return opts.join(" ")
   end
 
-  desc "run cucumber example test case under projects folder."
+  desc "run cucumber example test case under projects folder.
+Usage:
+      bundle exec rake test:example"
   task :example do
     ENV['CUCUMBER_OPTS'] = create_options "example"
+    Rake::Task['test:start'].invoke()
+  end
+
+  desc "Run specified test in a given project folder
+Usage:
+      bundle exec rake test:project[example,'BROWSER=chrome DEBUG=ON']
+Or
+      bundle exec rake test:project[example]"
+  task :project, [:project_name, :extra_opts] do |t, args|
+    ENV['CUCUMBER_OPTS'] = create_options args[:project_name], args[:extra_opts]
     Rake::Task['test:start'].invoke()
   end
 end
