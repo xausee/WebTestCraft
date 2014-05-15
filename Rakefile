@@ -53,6 +53,11 @@ Or
     Rake::Task['test:start'].invoke()
   end
 
+  desc "Run specified test in a given project folder with cucumber profile
+Usage:
+      bundle exec rake test:project_with_profile[example,google_search,'BROWSER=chrome DEBUG=ON']
+Or
+      bundle exec rake test:project_with_profile[example,google_search]"
   task :project_with_profile, [:project_name, :profile, :extra_opts] do |t, args|
     ENV['CUCUMBER_OPTS'] = create_options_with_profile args[:project_name], args[:profile], args[:extra_opts]
     Rake::Task['test:start'].invoke()
