@@ -1,5 +1,6 @@
 Feature:Test WebTestCraft framework.
 
+  @baidu_search
 Scenario: Visit baidu and do a search
   Given User visit baidu home page
   Then Current page must be Baidu Home page
@@ -7,6 +8,7 @@ Scenario: Visit baidu and do a search
   Then Current page must be Baidu Search Results page
   Then Choose the first result
 
+  @google_search
 Scenario: Visit google and do a search
   Given User visit google home page
   Then Current page must be Google Home page

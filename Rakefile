@@ -25,6 +25,16 @@ namespace :test do
     return opts.join(" ")
   end
 
+  def create_options_with_profile(project_name, profile, extra_opts = 'BROWSER="FIREFOX" DEBUG="ON"')
+    Dir::mkdir('results') if not File.directory?('results')
+    opts = []
+    opts = ["--profile", "#{profile}"]
+    opts += ["projects/#{project_name}"]
+    opts += ["--require", "projects/#{project_name}/features"]
+    opts += [extra_opts]
+    return opts.join(" ")
+  end
+
   desc "run cucumber example test case under projects folder.
 Usage:
       bundle exec rake test:example"
@@ -40,6 +50,11 @@ Or
       bundle exec rake test:project[example]"
   task :project, [:project_name, :extra_opts] do |t, args|
     ENV['CUCUMBER_OPTS'] = create_options args[:project_name], args[:extra_opts]
+    Rake::Task['test:start'].invoke()
+  end
+
+  task :project_with_profile, [:project_name, :profile, :extra_opts] do |t, args|
+    ENV['CUCUMBER_OPTS'] = create_options_with_profile args[:project_name], args[:profile], args[:extra_opts]
     Rake::Task['test:start'].invoke()
   end
 end

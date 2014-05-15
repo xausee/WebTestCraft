@@ -1,0 +1,9 @@
+
+<% common = "--format pretty" %>
+<% html = " --format progress --format html --out=results/features_report.html" %>
+
+default: --format pretty --format html --out=results/reports.html
+html_report: --format progress --format html --out=results/reports.html
+
+baidu_search: <%= html %> --tags  @baidu_search
+google_search: <%= html %> --tags  @google_search
