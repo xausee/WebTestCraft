@@ -1,4 +1,4 @@
-Feature:Test WebTestCraft framework.
+Feature:Test WebTestCraft framework on PC.
 
   @baidu_search
 Scenario: Visit baidu and do a search

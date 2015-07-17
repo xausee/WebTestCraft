@@ -2,25 +2,43 @@ $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__)))
 require "log"
 
 module WebTestCraft
-  class Browser
+  module Browser
     attr_accessor :browser
 
     def self.start type = 'FIREFOX'
       unless ENV['BROWSER'].nil?
         type = ENV['BROWSER']
       end
-
-      @browser = case type.upcase
-                   when 'IE','ie'
-                     IE.start
-                   when 'FIREFOX','firefox'
-                     Firefox.start
-                   when 'CHROME','chrome'
-                     Chrome.start
-                   else
-                     raise 'unsupported browser type.'
-                 end
+      @browser = eval('const_get(type.to_class_name)').start
     end
+
+    #def self.start type = 'FIREFOX'
+    #  unless ENV['BROWSER'].nil?
+    #    type = ENV['BROWSER']
+    #  end
+    #
+    #  p Firefox.class
+    #  p type.downcase.camelize(:upper)
+    #  p "ddd"
+    #  p Object.const_get('Firefox').start
+    #  p Object.const_get(type.downcase.camelize(:upper).to_s).class
+    #  @browser = Object.const_get(type.downcase.camelize(:upper)).start
+    #
+    #  #@browser=__send__(type.downcase.camelize(:upper)).start
+    #
+    ##  @browser = case type.upcase
+    ##               when 'IE'
+    ##                 IE.start
+    ##               when 'FIREFOX'
+    ##                 Firefox.start
+    ##               when 'CHROME'
+    ##                 Chrome.start
+    ##               when 'DEVICEEMULATOR'
+    ##                 DeviceEmulator.start
+    ##               else
+    ##                 raise 'unsupported browser type.'
+    ##             end
+    #end
 
     class IE
       def self.start
@@ -59,6 +77,22 @@ module WebTestCraft
         caps = Selenium::WebDriver::Remote::Capabilities.chrome('chromeOptions' => {'args' => args, 'prefs' => prefs})
         Logger.info "Launching Chrome..."
         Watir::Browser.new(:chrome, :http_client => http_client, :desired_capabilities => caps)
+      end
+    end
+
+    class DeviceEmulator
+      def self.start
+      require 'selenium-webdriver'
+      switches = []
+      switches << '--test-type --touch-events'
+      #mobile_emulation = { "deviceName" => 'Apple iPad 3 / 4' }
+      mobile_emulation = { "deviceName" => 'Apple iPhone 3GS' }
+      caps = Selenium::WebDriver::Remote::Capabilities.chrome('chromeOptions' => { 'mobileEmulation' => mobile_emulation })
+      http_client = Selenium::WebDriver::Remote::Http::Default.new
+      http_client.timeout = 50
+
+      ENV['PATH'] = File.expand_path File.join(File.dirname(__FILE__), 'driver')
+      Selenium::WebDriver.for(:chrome,:switches => switches, :desired_capabilities => caps,:http_client => http_client )
       end
     end
   end
