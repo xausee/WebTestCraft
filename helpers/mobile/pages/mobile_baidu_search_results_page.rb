@@ -2,20 +2,20 @@ module WebTestCraft
   class MobileBaiduSearchResultsPage < WebTestCraft::Page
     Widgets.register_widget(WebTestCraft::MobileBaiduResultsWidget, :mobile_baidu_results_widget)
     def url
-      'wap.baidu.com'
+      'http://wap.baidu.com'
     end
 
     def self.page_id
       #layer.div(:id => "content_left").attribute_value("class")
-      "content_left"
+      "page-bd"
     end
 
     def page_mark
-      layer.div(:id => "content_left")
+      layer.div(:id => "page-bd")
     end
 
     def self.page_mark_value
-      "content_left"
+      "page-bd"
     end
 
   end

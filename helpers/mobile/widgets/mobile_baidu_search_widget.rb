@@ -2,15 +2,15 @@ module WebTestCraft
   class MobileBaiduSearchWidget < WebTestCraft::Widget
 
     def layer
-      @container.div(:id => 'fm')
+      @container.div(:id => 'page')
     end
 
     def keywords_input
-      layer.text_field(:id => 'kw1')
+      layer.text_field(:id => 'index-kw')
     end
 
     def search_button
-      layer.button(:id => 'su1')
+      layer.button(:id => 'index-bn')
     end
 
   end

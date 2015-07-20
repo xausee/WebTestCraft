@@ -82,17 +82,19 @@ module WebTestCraft
 
     class DeviceEmulator
       def self.start
-      require 'selenium-webdriver'
+      #require 'selenium-webdriver'
+      require 'watir-webdriver'
       switches = []
       switches << '--test-type --touch-events'
       #mobile_emulation = { "deviceName" => 'Apple iPad 3 / 4' }
       mobile_emulation = { "deviceName" => 'Apple iPhone 3GS' }
       caps = Selenium::WebDriver::Remote::Capabilities.chrome('chromeOptions' => { 'mobileEmulation' => mobile_emulation })
       http_client = Selenium::WebDriver::Remote::Http::Default.new
-      http_client.timeout = 50
+      http_client.timeout = 120
 
       ENV['PATH'] = File.expand_path File.join(File.dirname(__FILE__), 'driver')
-      Selenium::WebDriver.for(:chrome,:switches => switches, :desired_capabilities => caps,:http_client => http_client )
+      #Selenium::WebDriver.for(:chrome,:switches => switches, :desired_capabilities => caps,:http_client => http_client )
+      Watir::Browser.new :chrome, :http_client => http_client, :desired_capabilities => caps, :switches => switches
       end
     end
   end

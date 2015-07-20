@@ -5,21 +5,17 @@ module WebTestCraft
       'http://wap.baidu.com'
     end
 
-    def visit
-      @browser.navigate.to url
-    end
-
     def self.page_id
       #id="fm"
-      "fm"
+      "index-form"
     end
 
     def page_mark
-      layer.form(:id => "form1")
+      layer.form(:id => "index-form")
     end
 
     def self.page_mark_value
-      "form1"
+      "index-form"
     end
 
   end

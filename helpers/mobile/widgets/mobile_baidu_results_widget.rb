@@ -2,15 +2,15 @@ module WebTestCraft
   class MobileBaiduResultsWidget < WebTestCraft::Widget
 
     def layer
-      @container.div(:id => 'container')
+      @container.div(:id => 'page-bd')
     end
 
     def text_result_container
-      layer.div(:id =>  'content_left')
+      layer.div(:id =>  'results')
     end
 
     def first_result
-      text_result_container.div(:id => 1.to_s).a(:class => 'favurl')
+      text_result_container.div(:class => /result/).a
     end
 
   end
