@@ -2,15 +2,15 @@ module WebTestCraft
   class BaiduSearchWidget < WebTestCraft::Widget
 
     def layer
-      @container.div(:id => 'fm')
+      @container.form(:id => 'form')
     end
 
     def keywords_input
-      layer.text_field(:id => 'kw1')
+      layer.text_field(:id => 'kw')
     end
 
     def search_button
-      layer.button(:id => 'su1')
+      layer.button(:id => 'su')
     end
 
   end

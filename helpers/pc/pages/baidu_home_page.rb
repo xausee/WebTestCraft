@@ -7,15 +7,15 @@ module WebTestCraft
 
     def self.page_id
       #id="fm"
-      "fm"
+      "form"
     end
 
     def page_mark
-      layer.form(:id => "form1")
+      layer.form(:id => "form")
     end
 
     def self.page_mark_value
-      "form1"
+      "form"
     end
 
   end

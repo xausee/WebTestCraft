@@ -9,36 +9,12 @@ module WebTestCraft
       unless ENV['BROWSER'].nil?
         type = ENV['BROWSER']
       end
+
+      if ENV['BROWSER'].downcase == 'ie'
+        IE.start
+      end
       @browser = eval('const_get(type.to_class_name)').start
     end
-
-    #def self.start type = 'FIREFOX'
-    #  unless ENV['BROWSER'].nil?
-    #    type = ENV['BROWSER']
-    #  end
-    #
-    #  p Firefox.class
-    #  p type.downcase.camelize(:upper)
-    #  p "ddd"
-    #  p Object.const_get('Firefox').start
-    #  p Object.const_get(type.downcase.camelize(:upper).to_s).class
-    #  @browser = Object.const_get(type.downcase.camelize(:upper)).start
-    #
-    #  #@browser=__send__(type.downcase.camelize(:upper)).start
-    #
-    ##  @browser = case type.upcase
-    ##               when 'IE'
-    ##                 IE.start
-    ##               when 'FIREFOX'
-    ##                 Firefox.start
-    ##               when 'CHROME'
-    ##                 Chrome.start
-    ##               when 'DEVICEEMULATOR'
-    ##                 DeviceEmulator.start
-    ##               else
-    ##                 raise 'unsupported browser type.'
-    ##             end
-    #end
 
     class IE
       def self.start

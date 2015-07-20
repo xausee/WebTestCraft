@@ -5,27 +5,12 @@ end
 
 And(/^Search game using keyword (.*)$/) do |keywords|
   $env.logger.step "Search game using keywords #{keywords} on baidu home page."
-  mobile_baidu_home_page.mobile_baidu_search_widget.keywords_input.set keywords
-  mobile_baidu_home_page.mobile_baidu_search_widget.search_button.click
+  hp = mobile_baidu_home_page
+  hp.mobile_baidu_search_widget.keywords_input.set keywords
+  hp.mobile_baidu_search_widget.search_button.click
 end
 
 Then(/^Choose the first result$/) do
   $env.logger.step "Choose the first result on results page."
   mobile_baidu_search_results_page.mobile_baidu_results_widget.first_result.wait_exists.click
-end
-
-Given(/^User visit google home page$/) do
-  $env.logger.step "Navigating to google home page."
-  google_home_page.visit
-end
-
-And(/^Search version control tool (.*) by google$/) do |keywords|
-  $env.logger.step "Search game using keywords #{keywords} on google home page."
-  google_home_page.google_search_widget.keywords_input.set keywords
-  google_home_page.google_search_widget.search_button.click
-end
-
-Then(/^Choose the first result on google search results page$/) do
-  $env.logger.step "Choose the first result on google search results page."
-  google_search_results_page.google_search_results_widget.first_result_link.wait_exists.click
 end
