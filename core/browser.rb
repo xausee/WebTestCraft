@@ -12,8 +12,9 @@ module WebTestCraft
 
       if ENV['BROWSER'].downcase == 'ie'
         IE.start
+      else
+        @browser = eval('const_get(type.to_class_name)').start
       end
-      @browser = eval('const_get(type.to_class_name)').start
     end
 
     class IE
