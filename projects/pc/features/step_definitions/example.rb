@@ -5,8 +5,9 @@ end
 
 And(/^Search game using keyword (.*)$/) do |keywords|
   $env.logger.step "Search game using keywords #{keywords} on baidu home page."
-  baidu_home_page.baidu_search_widget.keywords_input.set keywords
-  baidu_home_page.baidu_search_widget.search_button.click
+  hp = baidu_home_page
+  hp.baidu_search_widget.keywords_input.set keywords
+  hp.baidu_search_widget.search_button.click
 end
 
 Then(/^Choose the first result$/) do
@@ -21,8 +22,9 @@ end
 
 And(/^Search version control tool (.*) by google$/) do |keywords|
   $env.logger.step "Search game using keywords #{keywords} on google home page."
-  google_home_page.google_search_widget.keywords_input.set keywords
-  google_home_page.google_search_widget.search_button.click
+  hp = google_home_page
+  hp.google_search_widget.keywords_input.set keywords
+  hp.google_search_widget.search_button.click
 end
 
 Then(/^Choose the first result on google search results page$/) do
