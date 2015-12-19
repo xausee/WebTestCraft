@@ -8,6 +8,18 @@ Scenario: Visit baidu and do a search
   Then Current page must be Baidu Search Results page
   Then Choose the first result
 
+  @baidu_search @data_from_csv
+  Scenario Outline: Visit baidu and do a search, data from csv
+    Given User visit baidu home page
+    Then Current page must be <page_name> page
+    And Search game using keyword <key_words>
+    Then Current page must be <results_page> page
+    Then Choose the first result
+
+Examples:
+    |page_name|key_words|results_page|
+    Data:example.csv
+
   @google_search
 Scenario: Visit google and do a search
   Given User visit google home page

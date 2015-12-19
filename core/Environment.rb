@@ -33,7 +33,7 @@ module WebTestCraft
     def before scenario
       @logger.text ""
       @logger.text scenario.name
-      scenario.steps.each do |step|
+      scenario.test_steps.each do |step|
         @logger.text step.name
       end
       @logger.text ""
