@@ -9,8 +9,10 @@ module Cucumber
         def parse_test_data file
           data = ""
           full_path = Dir.pwd + '/features/test_data/'+file
-          CSV.foreach(full_path) do |row|
-            data += "|"+row.join('|')+"|\n"
+          CSV.open(full_path, "r").each_with_index do |row, index|
+            if index != 0
+              data += "|"+row.join('|')+"|\n"
+            end
           end
           data
         end

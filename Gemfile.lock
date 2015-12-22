@@ -19,11 +19,18 @@ GEM
       gherkin3 (~> 3.1.0)
     diff-lcs (1.2.5)
     ffi (1.9.10-x64-mingw32)
+    ffi (1.9.10-x86-mingw32)
     gherkin3 (3.1.2)
     i18n (0.7.0)
+    mini_magick (4.0.4)
+    mini_portile2 (2.0.0)
     multi_json (1.11.2)
     multi_test (0.1.2)
+    nokogiri (1.6.8.rc1-x86-mingw32)
+      mini_portile2 (~> 2.0.0)
     rake (10.2.0)
+    rautomation (0.17.0)
+      ffi (~> 1.9.0)
     rubyzip (1.1.7)
     selenium-webdriver (2.48.1)
       childprocess (~> 0.5)
@@ -33,12 +40,37 @@ GEM
     watir (5.0.0)
       commonwatir (~> 4)
       watir-webdriver
+    watir (5.0.0-x86-mingw32)
+      commonwatir (~> 4)
+      watir-classic (~> 4.0)
+      watir-webdriver
+    watir-classic (4.2.0)
+      ffi (~> 1.0)
+      multi_json
+      nokogiri (>= 1.5.7.rc3)
+      rautomation (~> 0.7)
+      win32-process (>= 0.5.5)
+      win32screenshot (~> 2.0.0)
+      windows-pr (>= 0.6.6)
     watir-webdriver (0.9.1)
       selenium-webdriver (>= 2.46.2)
     websocket (1.2.2)
+    win32-api (1.5.3-universal-mingw32)
+    win32-process (0.8.3)
+      ffi (>= 1.0.0)
+    win32screenshot (2.0.0)
+      ffi (~> 1.9.0)
+      mini_magick (~> 4.0.0)
+      rautomation (~> 0.7)
+    windows-api (0.4.4)
+      win32-api (>= 1.4.5)
+    windows-pr (1.2.4)
+      win32-api (>= 1.4.5)
+      windows-api (>= 0.4.0)
 
 PLATFORMS
   x64-mingw32
+  x86-mingw32
 
 DEPENDENCIES
   activesupport (= 3.2.0)
